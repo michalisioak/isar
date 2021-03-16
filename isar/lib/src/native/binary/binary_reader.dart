@@ -115,6 +115,22 @@ class BinaryReader {
     return _buffer.view(bytesOffset, length);
   }
 
+  Map readMap(int offset, {bool staticOffset = true}) {
+    return readMapOrNull(offset, staticOffset: staticOffset) ?? {};
+  }
+
+  Map? readMapOrNull(int offset, {bool staticOffset = true}) {
+    if (staticOffset && offset >= _staticSize) return null;
+    final bytesOffset = _buffer.readInt32(offset);
+    if (bytesOffset == 0) {
+      return null;
+    }
+    final length = _buffer.readInt32(offset + 4);
+
+    return jsonDecode(
+        utf8Decoder.convert(_buffer, bytesOffset, bytesOffset + length));
+  }
+
   List<bool>? readBoolList(int offset) {
     if (offset >= _staticSize) return [];
 

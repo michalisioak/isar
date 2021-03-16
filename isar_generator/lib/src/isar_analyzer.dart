@@ -220,6 +220,8 @@ class IsarAnalyzer extends Builder {
       }
     } else if (type.isDartCoreString) {
       return IsarType.String;
+    } else if (type.isDartCoreMap) {
+      return IsarType.Map;
     } else if (type.isDartCoreList) {
       final parameterizedType = type as ParameterizedType;
       final typeArguments = parameterizedType.typeArguments;

@@ -127,6 +127,7 @@ enum IsarType {
   DateTime,
   String,
   Bytes,
+  Map,
   BoolList,
   IntList,
   FloatList,
@@ -205,6 +206,8 @@ extension IsarTypeX on IsarType {
         return 10;
       case IsarType.StringList:
         return 11;
+      case IsarType.Map:
+        return 12;
     }
     return -1;
   }

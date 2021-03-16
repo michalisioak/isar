@@ -154,6 +154,9 @@ String _generateSerialize(ObjectInfo object) {
       case IsarType.Bytes:
         code += 'writer.writeBytes(offsets[$i], $accessor);';
         break;
+      case IsarType.Map:
+        code += 'writer.writeMap(offsets[$i], $accessor);';
+        break;
       case IsarType.BoolList:
         code += 'writer.writeBoolList(offsets[$i], $accessor);';
         break;
@@ -223,6 +226,9 @@ String _generateDeserialize(ObjectInfo object) {
         break;
       case IsarType.Bytes:
         deser = 'reader.readBytes$orNull(offsets[$i]) $orNullList';
+        break;
+      case IsarType.Map:
+        deser = 'reader.readMap$orNull(offsets[$i])';
         break;
       case IsarType.BoolList:
         deser = 'reader.readBool${orElNull}List(offsets[$i]) $orNullList';

@@ -74,6 +74,10 @@ class BinaryWriter {
     _dynamicOffset += value?.length ?? 0;
   }
 
+  void writeMap(int offset, Map value) {
+    writeBytes(offset, Uint8List.fromList(jsonEncode(value).codeUnits));
+  }
+
   void writeBoolList(int offset, List<bool?>? values) {
     assert(offset < _staticSize);
     if (values == null) {
